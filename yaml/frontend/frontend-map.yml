@@ -1,0 +1,11 @@
+---
+apiVersion: getambassador.io/v2
+kind: Mapping
+metadata:
+  name: frontend
+  namespace: boutique
+spec:
+  host: aes-labs.com
+  prefix: /
+  service: frontend:80
+---
