@@ -6,6 +6,6 @@ metadata:
   namespace: boutique
 spec:
   host: aes-labs.mturner.k736.net
-  prefix: /frontend
+  prefix: /
   service: frontend:80
 ---
