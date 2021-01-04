@@ -3,9 +3,8 @@ apiVersion: getambassador.io/v2
 kind: Mapping
 metadata:
   name: frontend
-  namespace: boutique
+  namespace: default
 spec:
-  host: aes-labs.mturner.k736.net
-  prefix: /
+  host: aes-labs.com
   service: frontend:80
 ---
