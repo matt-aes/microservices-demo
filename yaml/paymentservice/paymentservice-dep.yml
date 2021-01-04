@@ -34,7 +34,7 @@ spec:
       terminationGracePeriodSeconds: 5
       containers:
       - name: server
-        image: agervais/paymentservice:v0.3.1
+        image: docker.io/ambmatt/paymentservice:demo
         ports:
         - containerPort: 50051
           name: grpc

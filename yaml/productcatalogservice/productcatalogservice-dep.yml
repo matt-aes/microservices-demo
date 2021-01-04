@@ -20,26 +20,27 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: shippingservice
+  name: productcatalogservice
   namespace: default
 spec:
   selector:
     matchLabels:
-      app: shippingservice
+      app: productcatalogservice
   template:
     metadata:
       labels:
-        app: shippingservice
+        app: productcatalogservice
     spec:
+      terminationGracePeriodSeconds: 5
       containers:
       - name: server
-        image: docker.io/ambmatt/shippingservice:demo
+        image: docker.io/ambmatt/productcatalogservice:demo
         ports:
-        - containerPort: 50051
+        - containerPort: 3550
           name: grpc
         env:
         - name: PORT
-          value: "50051"
+          value: "3550"
         - name: JAEGER_SERVICE_ADDR
           value: "otel-collector.monitoring:14268"
         # - name: DISABLE_STATS
@@ -49,12 +50,11 @@ spec:
         # - name: DISABLE_PROFILER
         #   value: "1"
         readinessProbe:
-          periodSeconds: 5
           exec:
-            command: ["/bin/grpc_health_probe", "-addr=:50051"]
+            command: ["/bin/grpc_health_probe", "-addr=:3550"]
         livenessProbe:
           exec:
-            command: ["/bin/grpc_health_probe", "-addr=:50051"]
+            command: ["/bin/grpc_health_probe", "-addr=:3550"]
         resources:
           requests:
             cpu: 100m

@@ -20,47 +20,45 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: currencyservice
-  namespace: boutique
+  name: cartservice
+  namespace: default
 spec:
   selector:
     matchLabels:
-      app: currencyservice
+      app: cartservice
   template:
     metadata:
       labels:
-        app: currencyservice
-      annotations:
-        getambassador.io/inject-traffic-agent: enabled
-        getambassador.io/inject-traffic-agent-grpc: "true"
+        app: cartservice
     spec:
       terminationGracePeriodSeconds: 5
       containers:
       - name: server
-        image: agervais/currencyservice:v0.3.1
+        image: docker.io/ambmatt/cartservice:demo
         ports:
-        - name: grpc
-          containerPort: 7000
+        - containerPort: 7070
+          name: grpc
         env:
+        - name: REDIS_ADDR
+          value: "redis-cart:6379"
         - name: PORT
-          value: "7000"
-        # - name: DISABLE_TRACING
-        #   value: "1"
-        # - name: DISABLE_PROFILER
-        #   value: "1"
-        # - name: DISABLE_DEBUGGER
-        #   value: "1"
-        readinessProbe:
-          exec:
-            command: ["/bin/grpc_health_probe", "-addr=:7000"]
-        livenessProbe:
-          exec:
-            command: ["/bin/grpc_health_probe", "-addr=:7000"]
+          value: "7070"
+        - name: LISTEN_ADDR
+          value: "0.0.0.0"
         resources:
           requests:
-            cpu: 100m
+            cpu: 200m
             memory: 64Mi
           limits:
-            cpu: 200m
+            cpu: 300m
             memory: 128Mi
+        readinessProbe:
+          initialDelaySeconds: 15
+          exec:
+            command: ["/bin/grpc_health_probe", "-addr=:7070", "-rpc-timeout=5s"]
+        livenessProbe:
+          initialDelaySeconds: 15
+          periodSeconds: 10
+          exec:
+            command: ["/bin/grpc_health_probe", "-addr=:7070", "-rpc-timeout=5s"]
 ---

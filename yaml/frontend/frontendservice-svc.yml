@@ -20,14 +20,14 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: emailservice
+  name: frontend
   namespace: default
 spec:
   type: ClusterIP
   selector:
-    app: emailservice
+    app: frontend
   ports:
-  - name: grpc
-    port: 5000
-    targetPort: grpc
+  - name: http
+    port: 80
+    targetPort: http
 ---

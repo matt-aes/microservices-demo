@@ -34,7 +34,7 @@ spec:
       terminationGracePeriodSeconds: 5
       containers:
       - name: server
-        image: agervais/emailservice:v0.3.1
+        image: docker.io/ambmatt/emailservice:demo
         ports:
         - containerPort: 8080
           name: grpc

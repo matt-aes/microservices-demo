@@ -34,7 +34,7 @@ spec:
       terminationGracePeriodSeconds: 5
       containers:
       - name: server
-        image: agervais/recommendationservice:v0.3.1
+        image: docker.io/ambmatt/recommendationservice:demo
         ports:
         - containerPort: 8080
           name: grpc
@@ -63,5 +63,5 @@ spec:
             memory: 220Mi
           limits:
             cpu: 200m
-            memory: 450Mi
+            memory: 450Mic
 ---
