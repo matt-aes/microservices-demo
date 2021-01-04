@@ -63,5 +63,5 @@ spec:
             memory: 220Mi
           limits:
             cpu: 200m
-            memory: 450Mic
+            memory: 450Mi
 ---
