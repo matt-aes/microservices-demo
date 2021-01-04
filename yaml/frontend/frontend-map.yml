@@ -8,8 +8,4 @@ spec:
   host: aes-labs.com
   prefix: /
   service: frontend:80
-  labels:
-    ambassador:
-      - request_label_group:
-        - 5rpm
 ---
