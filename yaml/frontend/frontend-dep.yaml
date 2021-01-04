@@ -21,7 +21,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: frontend
-  namespace: boutique
+  namespace: default
 spec:
   selector:
     matchLabels:
