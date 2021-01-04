@@ -6,5 +6,6 @@ metadata:
   namespace: default
 spec:
   host: aes-labs.com
+  prefix: /
   service: frontend:80
 ---
