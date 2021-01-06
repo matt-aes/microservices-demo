@@ -1,0 +1,17 @@
+---
+apiVersion: getambassador.io/v2
+kind: FilterPolicy
+metadata:
+  name: api-filter-policy
+  namespace: default
+spec:
+  rules:
+    - host: "aes-labs.com" 
+      path: /         # update this value
+      filters:
+        - name: keycloak-oauth2-filter
+          namespace: ambassador
+          arguments:
+            scopes:
+              - "offline_access"
+---             
